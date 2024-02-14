@@ -13,12 +13,16 @@ def read_item(item_id: int):
 
 @app.get("/items/")
 
-def read_items(skip: int = 0, limit: int = 10, q: str = None):
+def read_items(skip: int = 0, limit: int = 10, q: str = ""):
     if q:
         return {"skip": skip, "limit": limit, "q": q}
     else:
         return {"skip": skip, "limit": limit}
     
-@app.get("users/{user_id}")
+@app.get("/users/{user_id}")
 def read_user_items(user_id):
     return {"user_id": user_id}
+
+@app.get("/users/{user_id}/items/")
+def read_user_items(user_id, skip = 0, limit = 10):
+    return {"user_id": user_id, "skip": skip, "limit": limit,}
